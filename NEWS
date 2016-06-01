@@ -42,6 +42,9 @@ leaflet 1.0.1
 * Fix #242: Compatibility with htmlwidgets 0.6 (thanks byzheng).
 
 
+* Add heatmap functionality based on modified version of Leaflet.heat plugin.
+  (Thanks, Kenton Russell!)
+
 leaflet 1.0.0
 --------------------------------------------------------------------------------
 
