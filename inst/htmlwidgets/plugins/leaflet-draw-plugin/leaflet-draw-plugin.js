@@ -50,19 +50,19 @@ LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygo
   this.drawControl = drawControl;
   this.drawControl.addTo(this);
 
-  var prefix = this.id + "_" + layerID + "_";
+  var prefix = this._container.id + "_" + layerID + "_";
   this.on('draw:created', function (e) {
     var layer = e.layer;
 		drawnItems.addLayer(layer);
 		if (e.layerType === "circle") {
 		  e.layer.feature = {properties: {radius: e.layer.getRadius()}};
 		}
-    if (!HTMLWidgets.shinyMode) return;
     Shiny.onInputChange(prefix + "created", layer.toGeoJSON());
+    Shiny.onInputChange("created", layer.toGeoJSON());
     Shiny.onInputChange(prefix + "features", drawnItems.toGeoJSON());
+    Shiny.onInputChange("features2", drawnItems.toGeoJSON());
   });
 
-  if (HTMLWidgets.shinyMode) {
     this.on('draw:edited', function (e) {
       Shiny.onInputChange(prefix + "edited", e.layers.toGeoJSON());
       Shiny.onInputChange(prefix + "features", drawnItems.toGeoJSON());
@@ -88,7 +88,6 @@ LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygo
     this.on('draw:editstop', function () {
       Shiny.onInputChange(prefix + "editing", null);
     });
-  }
 };
 
 LeafletWidget.methods.removeDrawToolbar = function(){
