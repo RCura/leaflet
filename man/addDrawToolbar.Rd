@@ -7,7 +7,7 @@
 addDrawToolbar(map, layerID = "drawnItems", position = c("topleft",
   "topright", "bottomleft", "bottomright"), polyline = TRUE, polygon = TRUE,
   rectangle = TRUE, circle = TRUE, marker = TRUE, edit = TRUE,
-  remove = TRUE)
+  remove = TRUE, singleLayer = FALSE)
 }
 \arguments{
 \item{map}{the map to add/remove the toolbar to/from}
