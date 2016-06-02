@@ -1,4 +1,4 @@
-LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygon,rectangle,circle,marker,edit,remove){
+LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygon,rectangle,circle,marker,edit,remove, singleLayer){
   if (this.drawControl) {
     this.drawControl.removeFrom(this);
   }
@@ -57,10 +57,14 @@ LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygo
 		if (e.layerType === "circle") {
 		  e.layer.feature = {properties: {radius: e.layer.getRadius()}};
 		}
+    if (singleLayer){
+		  if (Object.keys(drawnItems._layers).length > 1) {
+        drawnItems.removeLayer(Object.keys(drawnItems._layers)[0]);
+		  }
+    }
+
     Shiny.onInputChange(prefix + "created", layer.toGeoJSON());
-    Shiny.onInputChange("created", layer.toGeoJSON());
     Shiny.onInputChange(prefix + "features", drawnItems.toGeoJSON());
-    Shiny.onInputChange("features2", drawnItems.toGeoJSON());
   });
 
     this.on('draw:edited', function (e) {

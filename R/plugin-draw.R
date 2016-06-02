@@ -56,13 +56,14 @@ addDrawToolbar <- function(map,layerID="drawnItems",
                            position = c('topleft', 'topright', 'bottomleft',
                                         'bottomright'),
                            polyline=TRUE,polygon=TRUE,rectangle=TRUE,
-                           circle=TRUE,marker=TRUE,edit=TRUE, remove=TRUE) {
+                           circle=TRUE,marker=TRUE,edit=TRUE, remove=TRUE,
+                           singleLayer=FALSE) {
 
   position = match.arg(position)
   map$dependencies <- c(map$dependencies, leafletDrawDependencies())
   map$drawToolbar<-T
   invokeMethod(map,getMapData(map),method =  'addDrawToolbar',layerID,position,
-               polyline,polygon,rectangle,circle,marker,edit,remove)
+               polyline,polygon,rectangle,circle,marker,edit,remove, singleLayer)
 }
 
 #' Customize draw plugin behavior
