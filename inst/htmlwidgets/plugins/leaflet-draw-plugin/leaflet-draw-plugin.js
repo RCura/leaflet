@@ -62,11 +62,11 @@ LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygo
         drawnItems.removeLayer(Object.keys(drawnItems._layers)[0]);
 		  }
     }
-
+if (!HTMLWidgets.shinyMode) return;
     Shiny.onInputChange(prefix + "created", layer.toGeoJSON());
     Shiny.onInputChange(prefix + "features", drawnItems.toGeoJSON());
   });
-
+if (HTMLWidgets.shinyMode) {
     this.on('draw:edited', function (e) {
       Shiny.onInputChange(prefix + "edited", e.layers.toGeoJSON());
       Shiny.onInputChange(prefix + "features", drawnItems.toGeoJSON());
@@ -92,6 +92,7 @@ LeafletWidget.methods.addDrawToolbar = function(layerID,position,polyline,polygo
     this.on('draw:editstop', function () {
       Shiny.onInputChange(prefix + "editing", null);
     });
+}
 };
 
 LeafletWidget.methods.removeDrawToolbar = function(){
