@@ -96,6 +96,8 @@ if (HTMLWidgets.shinyMode) {
 };
 
 LeafletWidget.methods.removeDrawToolbar = function(){
+  var thisMap = this;
+  thisMap.drawnItems.eachLayer(function(layer){thisMap.drawnItems.removeLayer(layer);})
   this.drawControl.removeFrom(this);
   delete this.drawControl;
 }
